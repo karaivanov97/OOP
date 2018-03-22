@@ -71,6 +71,20 @@ CComplex CComplex:: operator+(const CComplex & b)const {
 CComplex CComplex:: operator-(const CComplex & b)const {
 	return CComplex(x - b.x, y - b.y);
 }
+CComplex CComplex:: operator*(const CComplex & r)const {
+	return CComplex(x*r.y - y*r.x, x*r.y + y*r.x);
+}
+CComplex CComplex:: operator/(const CComplex & r)const {
+	CComplex tmp;
+	double d = r.x*r.x + r.y*r.y;
+	tmp = multi(CComplex(r.x, -r.y));
+	return CComplex(tmp.x / d, tmp.y / d);
+}
+CComplex CComplex:: operator~()const {
+	return CComplex(x, -y);
+}
+
+
 
 
 -------------------------------------------------------#pragma once
@@ -96,12 +110,20 @@ public:
 	CComplex div(const CComplex &) const;
 	CComplex operator+(const CComplex &)const;
 	CComplex operator-(const CComplex &)const;
+	CComplex operator*(const CComplex &)const;
+	CComplex operator/(const CComplex &)const;
+	CComplex operator~()const;
 };
 
 #endif
 
+
+
 ---------------------------------------
 / ConsoleApplication1.cpp : Defines the entry point for the console application.
+//
+
+// ConsoleApplication1.cpp : Defines the entry point for the console application.
 //
 
 #include "stdafx.h"
@@ -113,18 +135,28 @@ int main() {
 	CComplex a(1, 3), b(4, 3);
 	cout << "a+b = ";
 	(a.add(b)).print();
+	cout << endl;
 	(a + b).print();
 	cout << endl;
 	cout << "a-b = ";
 	(a.sub(b)).print();
+	cout << endl;
 	(a - b).print();
 	cout << endl;
 	cout << "a*b = ";
 	(a.multi(b)).print();
 	cout << endl;
+	(a*b).print();
+	cout << endl;
 	cout << "a/b = ";
 	(a.div(b)).print();
 	cout << endl;
+	(a / b).print();
+	cout << endl;
+	(~a).print();
 	return 0;
+}
+
+eturn 0;
 }
 
