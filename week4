@@ -83,13 +83,15 @@ CComplex CComplex:: operator/(const CComplex & r)const {
 CComplex CComplex:: operator~()const {
 	return CComplex(x, -y);
 }
+std::ostream& operator<<(std::ostream& os, const CComplex & z) {
+	return os << " ((" << std::fixed << z.x << ") + (" << std::fixed << z.y << ") * i) ";
+}
 
-
-
-
--------------------------------------------------------#pragma once
+----------------------------------------
+#pragma once
 #ifndef _COMPLEX_H
 #define _COMPLEX_H
+#include <iostream>
 
 class CComplex {
 private:
@@ -113,16 +115,17 @@ public:
 	CComplex operator*(const CComplex &)const;
 	CComplex operator/(const CComplex &)const;
 	CComplex operator~()const;
+	friend std::ostream& operator<<(std::ostream&, const CComplex &);
 };
 
 #endif
 
 
 
+
 ---------------------------------------
 / ConsoleApplication1.cpp : Defines the entry point for the console application.
 //
-
 // ConsoleApplication1.cpp : Defines the entry point for the console application.
 //
 
@@ -154,9 +157,8 @@ int main() {
 	(a / b).print();
 	cout << endl;
 	(~a).print();
+	cout << endl;
+	cout << a;
 	return 0;
-}
-
-eturn 0;
 }
 
